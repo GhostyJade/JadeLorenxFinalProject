@@ -1,0 +1,6 @@
+#Ignore node dependencies
+node_modules/
+
+#Ignores yarn errors
+yarn-error.log
+
