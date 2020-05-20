@@ -5,7 +5,7 @@ import { HomeView } from './views/index'
 
 import * as Config from './configs/index'
 
-import { StyleSheet, Text } from 'react-native'
+import { Text } from 'react-native'
 
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -16,7 +16,6 @@ const Tab = createBottomTabNavigator()
 
 Config.Language.LanguageInit()
 
-
 export default function App() {
   return (
     <NavigationContainer>
@@ -25,10 +24,10 @@ export default function App() {
           let iconName
           if (route.name === 'Home')
             iconName = focused ? 'home' : 'home-outline'
-          return <Icon name={iconName} style={styles.tabNavigatorIcon} />
+          return <Icon name={iconName} style={Config.Styles.AppNavigatorStyles.tabNavigatorIcon} />
         },
         tabBarLabel: ({ focused, color }) => {
-          return <Text style={styles.tabNavigatorText}>{route.name}</Text>
+          return <Text style={Config.Styles.AppNavigatorStyles.tabNavigatorText}>{route.name}</Text>
         }
       })} >
         <Tab.Screen name="Home" component={HomeView} ></Tab.Screen>
@@ -36,13 +35,3 @@ export default function App() {
     </NavigationContainer >
   )
 }
-
-const styles = StyleSheet.create({
-  tabNavigatorText: {
-    color: 'black',
-    fontSize: 16
-  },
-  tabNavigatorIcon: {
-    fontSize: 26
-  }
-})
