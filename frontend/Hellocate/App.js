@@ -1,19 +1,50 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Dimensions, StatusBar, Platform } from 'react-native';
+
+import * as Localization from 'expo-localization'
+import i18n from 'i18n-js'
+
+import { SearchBar } from './components/index'
+import Icon from 'react-native-vector-icons/FontAwesome5'
+
+const screenWidth = Math.round(Dimensions.get('window').width)
+const screenHeight = Math.round(Dimensions.get('window').height)
+
+i18n.translations = {
+  'en-US': { home: 'Home', searchBar: 'What are you looking for?' },
+  'it-IT': { home: 'Home', searchBar: 'Cosa stai cercando?' }
+}
+
+i18n.locale = Localization.locale
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <SearchBar />
+      <Text style={styles.homeText}>{i18n.t('home')}</Text>
+      <FlatList>
+
+      </FlatList>
+      <TouchableOpacity style={styles.fab}><Icon name="plus"></Icon></TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: screenWidth,
+    height: screenHeight,
+    top: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'column'
   },
+  fab: {
+    position: 'absolute',
+    right: 10, bottom: 10
+  },
+  homeText: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 24
+  }
 });
