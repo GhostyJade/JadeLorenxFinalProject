@@ -5,7 +5,7 @@ import { HomeView } from './views/index'
 
 import * as Config from './configs/index'
 
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -28,10 +28,9 @@ export default function App() {
           return <Icon name={iconName} style={styles.tabNavigatorIcon} />
         },
         tabBarLabel: ({ focused, color }) => {
-          
-          return <Icon name={iconName} style={styles.tabNavigatorIcon} />
+          return <Text style={styles.tabNavigatorText}>{route.name}</Text>
         }
-      })}>
+      })} >
         <Tab.Screen name="Home" component={HomeView} ></Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer >
@@ -40,7 +39,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
   tabNavigatorText: {
-
+    color: 'black',
+    fontSize: 16
   },
   tabNavigatorIcon: {
     fontSize: 26
