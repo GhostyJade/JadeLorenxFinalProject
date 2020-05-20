@@ -7,8 +7,10 @@ import i18n from 'i18n-js'
 import { SearchBar } from './components/index'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
+const topOffset = Platform.OS === 'android' ? StatusBar.currentHeight : 0
+
 const screenWidth = Math.round(Dimensions.get('window').width)
-const screenHeight = Math.round(Dimensions.get('window').height)
+const screenHeight = Math.round(Dimensions.get('window').height) - topOffset
 
 i18n.translations = {
   'en-US': { home: 'Home', searchBar: 'What are you looking for?' },
@@ -18,6 +20,7 @@ i18n.translations = {
 i18n.locale = Localization.locale
 
 export default function App() {
+
   return (
     <View style={styles.container}>
       <SearchBar />
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
   container: {
     width: screenWidth,
     height: screenHeight,
-    top: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    top: topOffset,
     backgroundColor: '#fff',
     flexDirection: 'column'
   },
