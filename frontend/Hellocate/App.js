@@ -1,22 +1,19 @@
-import React from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions, StatusBar, Platform } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View, FlatList, Dimensions, StatusBar, Platform } from 'react-native'
 
-import * as Localization from 'expo-localization'
 import i18n from 'i18n-js'
 
 import { SearchBar, FloatingActionButton } from './components/index'
 
+//Todo move this 3 lines to constants config
 const topOffset = Platform.OS === 'android' ? StatusBar.currentHeight : 0
 
 const screenWidth = Math.round(Dimensions.get('window').width)
 const screenHeight = Math.round(Dimensions.get('window').height) - topOffset
+import * as Config from './configs/index'
 
-i18n.translations = {
-  'en-US': { home: 'Home', searchBar: 'What are you looking for?' },
-  'it-IT': { home: 'Home', searchBar: 'Cosa stai cercando?' }
-}
+Config.Language.LanguageInit()
 
-i18n.locale = Localization.locale
 
 export default function App() {
 
@@ -29,7 +26,7 @@ export default function App() {
       </FlatList>
       <FloatingActionButton />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -45,4 +42,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24
   },
-});
+})
