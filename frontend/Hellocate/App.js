@@ -1,11 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Dimensions, StatusBar, Platform } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Dimensions, StatusBar, Platform } from 'react-native';
 
 import * as Localization from 'expo-localization'
 import i18n from 'i18n-js'
 
-import { SearchBar } from './components/index'
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import { SearchBar, FloatingActionButton } from './components/index'
 
 const topOffset = Platform.OS === 'android' ? StatusBar.currentHeight : 0
 
@@ -28,7 +27,7 @@ export default function App() {
       <FlatList>
 
       </FlatList>
-      <TouchableOpacity style={styles.fab}><Icon name="plus"></Icon></TouchableOpacity>
+      <FloatingActionButton />
     </View>
   );
 }
@@ -41,13 +40,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flexDirection: 'column'
   },
-  fab: {
-    position: 'absolute',
-    right: 10, bottom: 10
-  },
   homeText: {
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 24
-  }
+  },
 });

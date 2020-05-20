@@ -1,3 +1,7 @@
 import CustomSearchBar from './searchbar'
+import FloatingActionButton from './FloatingActionButton'
 
-export { CustomSearchBar as SearchBar }
+export {
+    CustomSearchBar as SearchBar,
+    FloatingActionButton
+}
