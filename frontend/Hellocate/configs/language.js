@@ -2,10 +2,14 @@ import * as Localization from 'expo-localization'
 
 import i18n from 'i18n-js'
 
+import it_IT from '../languages/it_IT.json'
+import en_US from '../languages/en_US.json'
+
 export function LanguageInit() {
+    console.log(it_IT)
     i18n.translations = {
-        'en-US': { home: 'Home', searchBar: 'What are you looking for?' },
-        'it-IT': { home: 'Home', searchBar: 'Cosa stai cercando?' }
+        'en-US': en_US,
+        'it-IT': it_IT
     }
 
     i18n.locale = Localization.locale
