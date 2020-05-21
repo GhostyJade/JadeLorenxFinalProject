@@ -36,15 +36,14 @@ export default function RegistrationView() {
     }
 
     return (
-        
-            <View style={Config.Styles.RegistrationViewStyles.container}>
+        <View style={Config.Styles.RegistrationViewStyles.container}>
             <Text style={Config.Styles.RegistrationViewStyles.welcome} >{i18n.t('registrationWelcome')}</Text>
-                <TextInput style={Config.Styles.RegistrationViewStyles.inputField} placeholder="Username" key="username" value={registrationData.username} onChangeText={updateUsernameText} />
-                <TextInput style={Config.Styles.RegistrationViewStyles.inputField} placeholder="Password" secureTextEntry key="password" value={registrationData.password} onChangeText={updatePasswordText} />
-                <TextInput style={Config.Styles.RegistrationViewStyles.inputField} placeholder="Confirm password" secureTextEntry key="confirmPassword" value={registrationData.confirmPassword} onChangeText={updateConfirmPasswordText} />
-                <View style={Config.Styles.RegistrationViewStyles.confirmButton}>
-                    <Button color="#a800ff" title="Register" />
-                </View>
+            <TextInput style={Config.Styles.RegistrationViewStyles.inputField} placeholder="Username" key="username" value={registrationData.username} onChangeText={updateUsernameText} />
+            <TextInput style={Config.Styles.RegistrationViewStyles.inputField} placeholder="Password" secureTextEntry key="password" value={registrationData.password} onChangeText={updatePasswordText} />
+            <TextInput style={Config.Styles.RegistrationViewStyles.inputField} placeholder="Confirm password" secureTextEntry key="confirmPassword" value={registrationData.confirmPassword} onChangeText={updateConfirmPasswordText} />
+            <View style={Config.Styles.RegistrationViewStyles.confirmButton}>
+                <Button color="#a800ff" title="Register" />
+            </View>
         </View>
     )
 
