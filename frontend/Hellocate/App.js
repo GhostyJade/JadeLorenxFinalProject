@@ -10,21 +10,18 @@ import { Text } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import { GlobalStoreProvider } from 'global-store-hook'
-
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import RegistrationView from './views/Registration'
+
+import { Provider, reducer, initialState } from './configs/global_state'
 
 const Tab = createBottomTabNavigator()
 
 Config.Language.LanguageInit()
 
-const globalState = {
-  loggedIn: false
-}
-
 export default function App() {
   return (
-    <GlobalStoreProvider initValues={globalState}>
+    <Provider reducer={reducer} initialState={initialState}>
       <NavigationContainer>
         <Tab.Navigator screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
@@ -38,8 +35,9 @@ export default function App() {
           }
         })} >
           <Tab.Screen name="Home" component={HomeView} ></Tab.Screen>
+          <Tab.Screen name="Register" component={RegistrationView} ></Tab.Screen>
         </Tab.Navigator>
       </NavigationContainer >
-    </GlobalStoreProvider>
+    </Provider>
   )
 }
