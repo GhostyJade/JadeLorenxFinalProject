@@ -39,6 +39,7 @@ User.Register(app, Config, db, crypt)
 Ambient.GetAmbients(app, DataUtilities)
 Ambient.AddAmbient(app, DataUtilities)
 Ambient.DeleteAmbient(app, DataUtilities)
+Ambient.UpdateAmbientName(app, DataUtilities)
 
 // export the function used by firebase
 exports.api = functions.https.onRequest(main) //Note: to call this api you must use {baseurl}/api/v1/{function}
