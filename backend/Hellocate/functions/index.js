@@ -36,7 +36,7 @@ User.Login(app, Config, db, crypt, jwt)
 User.Register(app, Config, db, crypt)
 
 // Ambient
-// Ambient.GetAmbient(app, Config, DataUtilities)
+Ambient.GetAmbients(app, DataUtilities)
 Ambient.AddAmbient(app, DataUtilities)
 
 // export the function used by firebase

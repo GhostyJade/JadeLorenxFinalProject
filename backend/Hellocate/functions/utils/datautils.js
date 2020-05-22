@@ -7,8 +7,18 @@ class DataUtils {
     }
 
     // Ambient Data utils:
-    getAllUserAmbients(username) {
-
+    async getAllUserAmbients(username, res) {
+        let success = false // idk which errors could happen, I should check later on... // TODO
+        let ambients = []
+        await this.db.ref(`${this.config.ambientsCollection}/${username}`).once("value", snapshot => {
+            if (snapshot.exists()) {
+                snapshot.forEach(child => {
+                    ambients.push({ id: child.key, name: child.val().name })
+                })
+            }
+        })
+        success = true
+        res.send({ success, ambients })
     }
 
     async addAmbient(username, data, res) {

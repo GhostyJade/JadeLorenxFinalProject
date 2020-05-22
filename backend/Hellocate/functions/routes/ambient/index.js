@@ -1,4 +1,4 @@
 module.exports = {
-    //GetAmbient: require('./get'),
+    GetAmbients: require('./get'),
     AddAmbient: require('./add')
 }
