@@ -1,0 +1,12 @@
+#Ignore node dependencies
+node_modules/
+
+# Ignore the server config
+.env
+
+#Ignores yarn errors
+yarn-error.log
+
+#Ignore db
+db.json
+
