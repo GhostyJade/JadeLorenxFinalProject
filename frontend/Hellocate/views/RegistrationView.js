@@ -15,12 +15,13 @@ export default function RegistrationView() {
     const [state, dispatch] = useTracked()
 
     const performRegistration = () => {
+        //check data
         fetch(Config.Network.serverURI + '/users/', {
             method: 'POST',
             body: {
 
             }
-        })
+        }).then(response => response.json()).then()
     }
 
     const updateUsernameText = (e) => {
