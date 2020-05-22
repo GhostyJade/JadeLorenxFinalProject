@@ -3,6 +3,7 @@ const admin = require('firebase-admin')
 const express = require('express')
 
 const crypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 admin.initializeApp(functions.config().firebase)
 
@@ -13,7 +14,34 @@ main.use('/v1/', app)
 main.use(express.json())
 
 const db = admin.database()
-const usersCollection = "users/"
+const usersCollection = "users"
+
+const Config = require('./config.json')
+
+//login
+app.post('/users/:username', async (req, res) => {
+    const { username } = req.params
+    const { password } = req.body
+
+    let authenticated = false
+    let token = null
+
+    let user = undefined
+
+    await db.ref(`${usersCollection}/${username}/`).once("value", snapshot => {
+        if (snapshot.exists()) {
+            user = snapshot.val()
+        }
+    })
+
+    if (user) {
+        const authenticated = await crypt.compare(password, user.password)
+        if (authenticated) {
+            token = jwt.sign({ username }, Config.SECRET_KEY, { expiresIn: '24h' })
+        }
+    }
+    res.send({ authenticated, token })
+})
 
 // register
 app.post('/users/', async (req, res) => {
