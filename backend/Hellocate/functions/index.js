@@ -1,10 +1,12 @@
-const functions = require('firebase-functions');
+// Include all the required modules
+const functions = require('firebase-functions')
 const admin = require('firebase-admin')
-const express = require('express')
 
 const crypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const express = require('express')
 
+// Initializes the backend 
 admin.initializeApp(functions.config().firebase)
 
 const app = express()
@@ -13,9 +15,11 @@ const main = express()
 main.use('/v1/', app)
 main.use(express.json())
 
+// Creates the database reference
 const db = admin.database()
 const usersCollection = "users"
 
+// Import the config file
 const Config = require('./config.json')
 
 //login
@@ -35,7 +39,7 @@ app.post('/users/:username', async (req, res) => {
     })
 
     if (user) {
-        const authenticated = await crypt.compare(password, user.password)
+        authenticated = await crypt.compare(password, user.password)
         if (authenticated) {
             token = jwt.sign({ username }, Config.SECRET_KEY, { expiresIn: '24h' })
         }
@@ -65,4 +69,5 @@ app.post('/users/', async (req, res) => {
     res.send({ registered: !registered })
 })
 
-exports.api = functions.https.onRequest(main)
+// export the function used by firebase
+exports.api = functions.https.onRequest(main) //Note: to call this api you must use {baseurl}/api/v1/{function}
