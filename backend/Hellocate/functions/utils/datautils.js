@@ -41,6 +41,12 @@ class DataUtils {
         res.send({ success })
     }
 
+    async deleteAmbient(username, ambientKey, res) {
+        let success = true
+        await this.db.ref(`${this.config.ambientsCollection}/${username}/${ambientKey}`).remove()
+        res.send({ success, key: ambientKey }) //if fails, send back the key anyway so the client app can notify the client (this should't never happen btw, it's always successfull)
+    }
+
     // End Ambient Data utils
 }
 
