@@ -17,10 +17,17 @@ main.use(express.json())
 
 // Creates the database reference
 const db = admin.database()
-const usersCollection = "users"
+const usersCollection = "users/"
 
 // Import the config file
 const Config = require('./config.json')
+
+// Import some usefull stuff and initialize them
+const { DataUtils } = require('./utils/datautils')
+const DataUtilities = new DataUtils(db)
+
+// Import net functions
+
 
 //login
 app.post('/users/:username', async (req, res) => {
