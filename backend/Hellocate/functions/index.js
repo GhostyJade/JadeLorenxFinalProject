@@ -23,16 +23,21 @@ const Config = require('./config.json')
 
 // Import some usefull stuff and initialize them
 const { DataUtils } = require('./utils/datautils')
-const DataUtilities = new DataUtils(db)
+const DataUtilities = new DataUtils(db, Config)
 
 // Import app functions routes
 const User = require('./routes/user/index')
+const Ambient = require('./routes/ambient/index')
 
-//login
+// Login
 User.Login(app, Config, db, crypt, jwt)
 
-// register
+// Register
 User.Register(app, Config, db, crypt)
+
+// Ambient
+// Ambient.GetAmbient(app, Config, DataUtilities)
+Ambient.AddAmbient(app, DataUtilities)
 
 // export the function used by firebase
 exports.api = functions.https.onRequest(main) //Note: to call this api you must use {baseurl}/api/v1/{function}
