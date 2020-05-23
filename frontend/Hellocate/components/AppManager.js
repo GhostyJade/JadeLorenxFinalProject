@@ -12,6 +12,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import RegistrationView from '../views/RegistrationView'
 
+import * as Config from '../configs/index'
+
 const Tab = createBottomTabNavigator()
 
 const UserLoggedInView = () => {
@@ -28,8 +30,7 @@ const UserLoggedInView = () => {
                     return <Text style={Config.Styles.AppNavigatorStyles.tabNavigatorText}>{route.name}</Text>
                 }
             })} >
-                <Tab.Screen name="Home" component={HomeView} key="home"></Tab.Screen>,
-          <Tab.Screen name="Register" component={RegistrationView} key="register" ></Tab.Screen>
+                <Tab.Screen name="Home" component={HomeView} key="home"></Tab.Screen>
             </Tab.Navigator>
         </NavigationContainer >
     )
@@ -41,7 +42,7 @@ export default function AppManager() {
 
     return (
         <>
-            {state.authenticated ? UserLoggedInView : <RegistrationView />}
+            {state.authenticated ? <UserLoggedInView/> : <RegistrationView />}
         </>
     )
 }
