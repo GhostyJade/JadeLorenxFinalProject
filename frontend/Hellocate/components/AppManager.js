@@ -11,6 +11,8 @@ import { NavigationContainer } from '@react-navigation/native'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import RegistrationView from '../views/RegistrationView'
+import NewAmbientView from '../views/NewAmbientView'
+
 
 import * as Config from '../configs/index'
 
@@ -42,7 +44,7 @@ export default function AppManager() {
 
     return (
         <>
-            {state.authenticated ? <UserLoggedInView/> : <RegistrationView />}
+            {state.authenticated ? (state.showNewAmbientView ? <NewAmbientView /> : <UserLoggedInView />) : <RegistrationView />}
         </>
     )
 }
