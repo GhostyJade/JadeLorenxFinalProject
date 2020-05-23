@@ -1,0 +1,5 @@
+{
+    "SECRET_KEY": "your_key",
+    "usersCollection": "users",
+    "ambientsCollection": "ambients"
+}
