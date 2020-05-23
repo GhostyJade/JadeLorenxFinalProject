@@ -63,7 +63,7 @@ const RegistrationViewStyles = StyleSheet.create({
     },
     confirmButton: {
         borderRadius: 14,
-        width: 150        
+        width: 150
     },
     welcome: {
         color: '#000000',
@@ -72,9 +72,38 @@ const RegistrationViewStyles = StyleSheet.create({
     }
 })
 
+const NewAmbientView = StyleSheet.create({
+    container: {
+        width: Constants.ScreenWidth,
+        height: Constants.RawScreenHeight,
+    },
+    header: {
+        height: Constants.HeaderBarHeight
+    },
+    newText: {
+        color: '#fff',
+        fontSize: 18
+    },
+    inputField: {
+        width: 350,
+        height: 55,
+        margin: 10,
+        padding: 8,
+        //color: 'white',
+        borderRadius: 14,
+        fontSize: 18,
+        fontWeight: '500',
+    },
+    backIcon: {
+        color: '#fff',
+        fontSize: 16
+    }
+})
+
 export {
     AppNavigatorStyles,
     FloatingActionButtonStyles,
     HomeViewStyles,
-    RegistrationViewStyles
+    RegistrationViewStyles,
+    NewAmbientView
 }
