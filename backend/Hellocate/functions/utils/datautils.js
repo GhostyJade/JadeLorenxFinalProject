@@ -18,7 +18,7 @@ class DataUtils {
             }
         })
         success = true
-        res.send({ success, ambients })
+        res.json({ success, ambients })
     }
 
     async addAmbient(username, data, res) {
@@ -38,13 +38,13 @@ class DataUtils {
             await this.db.ref(`${this.config.ambientsCollection}/${username}`).push(data)
             success = true
         }
-        res.send({ success })
+        res.json({ success })
     }
 
     async deleteAmbient(username, ambientKey, res) {
         let success = true //maybe adding the callback and checking for error could solve always true?
         await this.db.ref(`${this.config.ambientsCollection}/${username}/${ambientKey}`).remove()
-        res.send({ success, key: ambientKey }) //if fails, send back the key anyway so the client app can notify the client (this should't never happen btw, it's always successful)
+        res.json({ success, key: ambientKey }) //if fails, send back the key anyway so the client app can notify the client (this should't never happen btw, it's always successful)
     }
 
     async updateAmbientName(username, ambientKey, newName, res) {
@@ -53,7 +53,7 @@ class DataUtils {
             if (err)
                 success = false
         })
-        res.send({ success, newName })
+        res.json({ success, newName })
     }
 
     // End Ambient Data utils
