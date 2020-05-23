@@ -6,6 +6,8 @@ const crypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const express = require('express')
 
+const cors = require('cors')
+
 // Initializes the backend 
 admin.initializeApp(functions.config().firebase)
 
@@ -14,6 +16,7 @@ const main = express()
 
 main.use('/v1/', app)
 main.use(express.json())
+main.use(cors())
 
 // Creates the database reference
 const db = admin.database()
