@@ -1,7 +1,8 @@
-const serverAddress = 'localhost'
-const serverPort = 8080
-const serverProtocol = 'http'
+const secretSettings = require('./secret.json')
 
-const serverURI = `${serverProtocol}://${serverAddress}:${serverPort}/`
+const serverAddress = secretSettings.remoteUrl
+const serverProtocol = 'https'
+
+const serverURI = `${serverProtocol}://${serverAddress}`
 
 export { serverURI }
