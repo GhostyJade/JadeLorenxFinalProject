@@ -47,6 +47,7 @@ Ambient.UpdateAmbientName(app, DataUtilities)
 
 // Room
 Room.AddRoom(app,DataUtilities)
+Room.GetAmbientsAndRooms(app,DataUtilities)
 
 // export the function used by firebase
 exports.api = functions.https.onRequest(main) //Note: to call this api you must use {baseurl}/api/v1/{function}

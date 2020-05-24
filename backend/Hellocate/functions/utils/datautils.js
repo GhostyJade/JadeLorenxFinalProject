@@ -79,6 +79,20 @@ class DataUtils {
         res.json({ success, roomName: data.room.name })
     }
 
+    async getAllUserAmbientsAndRooms(username, res) {
+        let success = false // idk which errors could happen, I should check later on... // TODO
+        let ambients = []
+        await this.db.ref(`${this.config.ambientsCollection}/${username}`).once("value", snapshot => {
+            if (snapshot.exists()) {
+                snapshot.forEach(child => {
+                    ambients.push({ id: child.key, name: child.val().name, rooms: child.val().rooms })
+                })
+            }
+        })
+        success = true
+        res.json({ success, ambients })
+    }
+
     // End Room Data utils
 }
 
