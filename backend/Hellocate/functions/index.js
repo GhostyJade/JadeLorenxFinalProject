@@ -31,6 +31,7 @@ const DataUtilities = new DataUtils(db, Config)
 // Import app functions routes
 const User = require('./routes/user/index')
 const Ambient = require('./routes/ambient/index')
+const Room = require('./routes/room/index')
 
 // Login
 User.Login(app, Config, db, crypt, jwt)
@@ -43,6 +44,9 @@ Ambient.GetAmbients(app, DataUtilities)
 Ambient.AddAmbient(app, DataUtilities)
 Ambient.DeleteAmbient(app, DataUtilities)
 Ambient.UpdateAmbientName(app, DataUtilities)
+
+// Room
+Room.AddRoom(app,DataUtilities)
 
 // export the function used by firebase
 exports.api = functions.https.onRequest(main) //Note: to call this api you must use {baseurl}/api/v1/{function}
