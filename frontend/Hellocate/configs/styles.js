@@ -34,7 +34,7 @@ const HomeViewStyles = StyleSheet.create({
     container: {
         width: Constants.ScreenWidth,
         height: Constants.ScreenHeight,
-        top: Constants.TopOffset,
+        marginTop: Constants.TopOffset,
         backgroundColor: '#fff',
         flexDirection: 'column'
     },
@@ -43,6 +43,13 @@ const HomeViewStyles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 24
     },
+    ambientContainer: {
+        height: 64,
+        margin: 24
+    },
+    ambientText: {
+        fontWeight: 'bold'
+    }
 })
 
 const RegistrationViewStyles = StyleSheet.create({
