@@ -101,13 +101,11 @@ class DataUtils {
 
     async updateRoom(username, data, res) {
         let success = true
-        await this.db.ref(`${this.config.ambientsCollection}/${username}/${data.ambientKey}/${this.config.roomsCollection}/${data.roomKey}`).update({name: data.room.name, icon:data.room.icon}, (err) => { //here we make always true that ambientKey and roomKey are already existent in the db
+        await this.db.ref(`${this.config.ambientsCollection}/${username}/${data.ambientKey}/${this.config.roomsCollection}/${data.roomKey}`).update({ name: data.room.name, icon: data.room.icon }, (err) => { //here we make always true that ambientKey and roomKey are already existent in the db // TODO missing room/ambient.
             if (err)
                 success = false
         })
-        res.json({ success, newName })
-
-        res.json({success})
+        res.json({ success, room: { name: data.room.name, icon: data.room.icon } })
     }
 
     // End Room Data utils
