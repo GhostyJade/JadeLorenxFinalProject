@@ -93,6 +93,12 @@ class DataUtils {
         res.json({ success, ambients })
     }
 
+    async deleteRoom(username, ambientKey, roomKey, res) {
+        let success = true //maybe adding the callback and checking for error could solve always true?
+        await this.db.ref(`${this.config.ambientsCollection}/${username}/${ambientKey}/${this.config.roomsCollection}/${roomKey}`).remove()
+        res.json({ success, ambientKey, roomKey }) //if fails, send back the key anyway so the client app can notify the user (this should't never happen btw, it's always successful)
+    }
+
     // End Room Data utils
 }
 

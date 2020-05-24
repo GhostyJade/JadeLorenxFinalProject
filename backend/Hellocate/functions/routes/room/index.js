@@ -1,4 +1,5 @@
 module.exports = {
     AddRoom: require('./add'),
-    GetAmbientsAndRooms: require('./get')
+    GetAmbientsAndRooms: require('./get'),
+    DeleteRoom: require('./delete')
 }

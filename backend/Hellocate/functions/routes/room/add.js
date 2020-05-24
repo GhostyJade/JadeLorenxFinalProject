@@ -8,6 +8,6 @@ module.exports = function AddRoom(app, DataUtils) {
             const { username } = req.params
             DataUtils.addRoom(username, roomData, res)
         }
-        
+
     })
 }
