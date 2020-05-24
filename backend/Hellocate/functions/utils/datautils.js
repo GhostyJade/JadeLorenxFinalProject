@@ -99,6 +99,17 @@ class DataUtils {
         res.json({ success, ambientKey, roomKey }) //if fails, send back the key anyway so the client app can notify the user (this should't never happen btw, it's always successful)
     }
 
+    async updateRoom(username, data, res) {
+        let success = true
+        await this.db.ref(`${this.config.ambientsCollection}/${username}/${data.ambientKey}/${this.config.roomsCollection}/${data.roomKey}`).update({name: data.room.name, icon:data.room.icon}, (err) => { //here we make always true that ambientKey and roomKey are already existent in the db
+            if (err)
+                success = false
+        })
+        res.json({ success, newName })
+
+        res.json({success})
+    }
+
     // End Room Data utils
 }
 
