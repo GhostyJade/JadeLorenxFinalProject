@@ -6,6 +6,8 @@ const crypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const express = require('express')
 
+const cors = require('cors')
+
 // Initializes the backend 
 admin.initializeApp(functions.config().firebase)
 
@@ -14,6 +16,7 @@ const main = express()
 
 main.use('/v1/', app)
 main.use(express.json())
+main.use(cors())
 
 // Creates the database reference
 const db = admin.database()
@@ -28,6 +31,7 @@ const DataUtilities = new DataUtils(db, Config)
 // Import app functions routes
 const User = require('./routes/user/index')
 const Ambient = require('./routes/ambient/index')
+const Room = require('./routes/room/index')
 
 // Login
 User.Login(app, Config, db, crypt, jwt)
@@ -40,6 +44,12 @@ Ambient.GetAmbients(app, DataUtilities)
 Ambient.AddAmbient(app, DataUtilities)
 Ambient.DeleteAmbient(app, DataUtilities)
 Ambient.UpdateAmbientName(app, DataUtilities)
+
+// Room
+Room.AddRoom(app, DataUtilities)
+Room.GetAmbientsAndRooms(app, DataUtilities)
+Room.DeleteRoom(app, DataUtilities)
+Room.UpdateRoom(app, DataUtilities)
 
 // export the function used by firebase
 exports.api = functions.https.onRequest(main) //Note: to call this api you must use {baseurl}/api/v1/{function}

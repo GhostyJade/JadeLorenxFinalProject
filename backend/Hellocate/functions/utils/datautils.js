@@ -18,7 +18,7 @@ class DataUtils {
             }
         })
         success = true
-        res.send({ success, ambients })
+        res.json({ success, ambients })
     }
 
     async addAmbient(username, data, res) {
@@ -38,13 +38,13 @@ class DataUtils {
             await this.db.ref(`${this.config.ambientsCollection}/${username}`).push(data)
             success = true
         }
-        res.send({ success })
+        res.json({ success })
     }
 
     async deleteAmbient(username, ambientKey, res) {
         let success = true //maybe adding the callback and checking for error could solve always true?
         await this.db.ref(`${this.config.ambientsCollection}/${username}/${ambientKey}`).remove()
-        res.send({ success, key: ambientKey }) //if fails, send back the key anyway so the client app can notify the client (this should't never happen btw, it's always successful)
+        res.json({ success, key: ambientKey }) //if fails, send back the key anyway so the client app can notify the user (this should't never happen btw, it's always successful)
     }
 
     async updateAmbientName(username, ambientKey, newName, res) {
@@ -53,10 +53,64 @@ class DataUtils {
             if (err)
                 success = false
         })
-        res.send({ success, newName })
+        res.json({ success, newName })
     }
 
     // End Ambient Data utils
+
+    // Room Data utils:
+    async addRoom(username, data, res) {
+        let success = false
+        let doesRoomExists = false
+        await this.db.ref(`${this.config.ambientsCollection}/${username}/${data.key}/${this.config.roomsCollection}`).once("value", snapshot => {
+            if (snapshot.exists()) {
+                snapshot.forEach(child => {
+                    if (child.val().name === data.room.name) {
+                        doesRoomExists = true
+                        return;
+                    }
+                })
+            }
+        })
+        if (!doesRoomExists) {
+            await this.db.ref(`${this.config.ambientsCollection}/${username}/${data.key}/${this.config.roomsCollection}`).push(data.room)
+            success = true
+        }
+        res.json({ success, roomName: data.room.name })
+    }
+
+    async getAllUserAmbientsAndRooms(username, res) {
+        let success = false // idk which errors could happen, I should check later on... // TODO
+        let ambients = []
+        await this.db.ref(`${this.config.ambientsCollection}/${username}`).once("value", snapshot => {
+            if (snapshot.exists()) {
+                snapshot.forEach(child => {
+                    ambients.push({ id: child.key, name: child.val().name, rooms: child.val().rooms })
+                })
+            }
+        })
+        success = true
+        res.json({ success, ambients })
+    }
+
+    async deleteRoom(username, ambientKey, roomKey, res) {
+        let success = true //maybe adding the callback and checking for error could solve always true?
+        await this.db.ref(`${this.config.ambientsCollection}/${username}/${ambientKey}/${this.config.roomsCollection}/${roomKey}`).remove()
+        res.json({ success, ambientKey, roomKey }) //if fails, send back the key anyway so the client app can notify the user (this should't never happen btw, it's always successful)
+    }
+
+    async updateRoom(username, data, res) {
+        let success = true
+        await this.db.ref(`${this.config.ambientsCollection}/${username}/${data.ambientKey}/${this.config.roomsCollection}/${data.roomKey}`).update({name: data.room.name, icon:data.room.icon}, (err) => { //here we make always true that ambientKey and roomKey are already existent in the db
+            if (err)
+                success = false
+        })
+        res.json({ success, newName })
+
+        res.json({success})
+    }
+
+    // End Room Data utils
 }
 
 module.exports = {
