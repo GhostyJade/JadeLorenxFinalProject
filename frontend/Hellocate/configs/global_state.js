@@ -6,7 +6,7 @@ const useValue = ({ reducer, initialState }) => useReducer(reducer, initialState
 const { Provider, useTracked } = createContainer(useValue)
 
 const initialState = {
-    authenticated: true, // false,
+    authenticated: false,
     showNewAmbientView: false,
     isFirstUpdate: true,
     ambientList: []
