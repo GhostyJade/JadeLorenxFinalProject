@@ -5,18 +5,9 @@ import * as Constants from './constants'
 const FloatingActionButtonStyles = StyleSheet.create({
     fab: {
         position: 'absolute',
-        width: 56,
-        height: 56,
-        alignItems: 'center',
-        justifyContent: 'center',
         right: 20,
         bottom: 20,
         backgroundColor: '#343434',
-        borderRadius: 30,
-        elevation: 8
-    },
-    plusIcon: {
-        color: 'white'
     }
 })
 
