@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useTracked } from '../configs/global_state'
 
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput } from 'react-native'
 import { Appbar, Snackbar } from 'react-native-paper'
 
 import i18n from 'i18n-js'
@@ -22,7 +22,9 @@ export default function NewAmbientView() {
     const dismissSnackbar = () => {
         setSnackbar({ ...snackbar, active: !snackbar.active })
     }
-
+    /**
+     * Send data to the backend
+     */
     const createAmbient = async () => {
         if (ambient.name === '') {
             setSnackbar({ active: true, message: 'snackbar_missingAmbientName' })
