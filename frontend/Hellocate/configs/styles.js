@@ -76,19 +76,23 @@ const NewAmbientView = StyleSheet.create({
         height: Constants.RawScreenHeight,
     },
     header: {
-        height: Constants.HeaderBarHeight
+        backgroundColor: '#fff'
     },
-    newText: {
-        color: '#fff',
-        fontSize: 18
+    nameText: {
+        fontSize: 18,
+        fontWeight: 'bold'
+    },
+    inputContainer: {
+        margin: 24,
+        alignItems: 'center'
     },
     inputField: {
-        width: 350,
+        width: 370,
         height: 55,
-        margin: 10,
+        marginTop: 10,
         padding: 8,
-        //color: 'white',
-        borderRadius: 14,
+        backgroundColor: '#f4f4f4',
+        borderRadius: 10,
         fontSize: 18,
         fontWeight: '500',
     },

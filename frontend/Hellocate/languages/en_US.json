@@ -2,5 +2,9 @@
     "home": "Home",
     "searchBar": "What are you looking for?",
     "registrationWelcome": "Welcome to Hellocate",
-    "new_ambient_name_text": "Ambient Name"
+    "new_ambient_name_text": "Ambient Name",
+    "new_ambient_placeholder": "Name",
+    "dismiss_snackbar": "Dismiss",
+    "snackbar_missingAmbientName": "Ambient name is empty",
+    "snackbar_Error":"An error has occurred while saving new ambient data"
 }

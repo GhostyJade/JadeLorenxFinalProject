@@ -2,5 +2,9 @@
     "home": "Home",
     "searchBar": "Cosa stai cercando?",
     "registrationWelcome": "Benvenuto su Hellocate",
-    "new_ambient_name_text": "Nome ambiente"
+    "new_ambient_name_text": "Nome ambiente",
+    "new_ambient_placeholder": "Nome",
+    "dismiss_snackbar": "Nascondi",
+    "snackbar_missingAmbientName": "Il nome dell'ambiente è vuoto",
+    "snackbar_Error":"Si è verificato un errore durante il salvataggio dei dati"
 }
