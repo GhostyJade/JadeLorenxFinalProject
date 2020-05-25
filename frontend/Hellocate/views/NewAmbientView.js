@@ -5,7 +5,7 @@ import { useTracked } from '../configs/global_state'
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import { Appbar } from 'react-native-paper'
 
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import i18n from 'i18n-js'
 
 import * as Configs from '../configs/index'
 
@@ -41,23 +41,12 @@ export default function NewAmbientView() {
 
     return (
         <View style={Configs.Styles.NewAmbientView.container}>
-            <Appbar.Header containerStyle={Configs.Styles.NewAmbientView.header}
-                /*leftComponent={
-                    <TouchableOpacity onPress={goBack}>
-                        <Icon style={Configs.Styles.NewAmbientView.backIcon} name="arrow-left"></Icon>
-                    </TouchableOpacity>
-                }
-                centerComponent={
-                    <Text style={Configs.Styles.NewAmbientView.newText}>Hellocate</Text>
-                }
-                rightComponent={
-                    <TouchableOpacity onPress={createAmbient}>
-                        <Icon style={Configs.Styles.NewAmbientView.backIcon} name="save"></Icon>
-                    </TouchableOpacity>
-                }*/
-            >
+            <Appbar.Header containerStyle={Configs.Styles.NewAmbientView.header}>
                 <Appbar.BackAction onPress={goBack} />
+                <Appbar.Content title="Hellocate" />
+                <Appbar.Action icon="floppy" onPress={createAmbient} />
             </Appbar.Header>
+            <Text>{i18n.t('new_ambient_name_text')}</Text>
             <TextInput placeholder="Name" onChangeText={text => { setAmbient({ name: text }); }} style={Configs.Styles.NewAmbientView.inputField}></TextInput>
         </View >
     )
