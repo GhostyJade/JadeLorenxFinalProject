@@ -3,7 +3,7 @@ import React from 'react'
 import { useTracked } from '../configs/global_state'
 
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
-import { Header } from 'react-native-elements'
+import { Appbar } from 'react-native-paper'
 
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
@@ -41,8 +41,8 @@ export default function NewAmbientView() {
 
     return (
         <View style={Configs.Styles.NewAmbientView.container}>
-            <Header containerStyle={Configs.Styles.NewAmbientView.header}
-                leftComponent={
+            <Appbar.Header containerStyle={Configs.Styles.NewAmbientView.header}
+                /*leftComponent={
                     <TouchableOpacity onPress={goBack}>
                         <Icon style={Configs.Styles.NewAmbientView.backIcon} name="arrow-left"></Icon>
                     </TouchableOpacity>
@@ -54,8 +54,10 @@ export default function NewAmbientView() {
                     <TouchableOpacity onPress={createAmbient}>
                         <Icon style={Configs.Styles.NewAmbientView.backIcon} name="save"></Icon>
                     </TouchableOpacity>
-                }
-            />
+                }*/
+            >
+                <Appbar.BackAction onPress={goBack} />
+            </Appbar.Header>
             <TextInput placeholder="Name" onChangeText={text => { setAmbient({ name: text }); }} style={Configs.Styles.NewAmbientView.inputField}></TextInput>
         </View >
     )

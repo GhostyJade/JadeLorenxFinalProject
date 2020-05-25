@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import i18n from 'i18n-js'
 
-import { SearchBar } from 'react-native-elements'
+import { Searchbar } from 'react-native-paper'
 
 export default class CustomSearchBar extends Component {
 
@@ -16,7 +16,7 @@ export default class CustomSearchBar extends Component {
 
     render() {
         return (
-            <SearchBar placeholder={i18n.t('searchBar')} onChangeText={this.onUpdateSearch} value={this.state.search} />
+            <Searchbar placeholder={i18n.t('searchBar')} onChangeText={this.onUpdateSearch} value={this.state.search} />
         )
     }
 }
