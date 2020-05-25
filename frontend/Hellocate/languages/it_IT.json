@@ -2,9 +2,15 @@
     "home": "Home",
     "searchBar": "Cosa stai cercando?",
     "registrationWelcome": "Benvenuto su Hellocate",
+    "registration_requiredInformation": "Tutti i campi sono richiesti",
+    "registration_passwordNotMatch": "La password non corrisponde",
+    "registration_btnRegister": "Registrati",
+    "registration_txtUsername": "Nome utente",
+    "registration_txtConfirmPassword": "Conferma password",
+    "registration_usernameTaken": "Username già usato",
     "new_ambient_name_text": "Nome ambiente",
     "new_ambient_placeholder": "Nome",
     "dismiss_snackbar": "Nascondi",
     "snackbar_missingAmbientName": "Il nome dell'ambiente è vuoto",
-    "snackbar_Error":"Si è verificato un errore durante il salvataggio dei dati"
+    "snackbar_Error": "Si è verificato un errore durante il salvataggio dei dati"
 }
