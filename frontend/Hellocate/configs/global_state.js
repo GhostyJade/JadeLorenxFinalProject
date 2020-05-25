@@ -7,7 +7,9 @@ const { Provider, useTracked } = createContainer(useValue)
 
 const initialState = {
     authenticated: true, // false,
-    showNewAmbientView: false
+    showNewAmbientView: false,
+    isFirstUpdate: true,
+    ambientList: []
 }
 
 const reducer = (state, action) => {
@@ -16,6 +18,11 @@ const reducer = (state, action) => {
         case 'hasLoggedOut': return { ...state, authenticated: false }
         case 'showAmbientView': return { ...state, showNewAmbientView: true }
         case 'hideAmbientView': return { ...state, showNewAmbientView: false }
+
+        case 'disableFirstUpdate': return { ...state, showNewAmbientView: false }
+        case 'enableFirstUpdate': return { ...state, showNewAmbientView: true }
+
+        case 'updateAmbientList': return { ...state, ambientList: action.list }
     }
 }
 
