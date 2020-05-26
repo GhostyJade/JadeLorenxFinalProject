@@ -2,13 +2,15 @@ import React, { useEffect } from "react"
 
 import i18n from 'i18n-js'
 
-import { Text, View, FlatList, SectionList } from 'react-native'
+import { Text, View, FlatList } from 'react-native'
 
 import { SearchBar, FloatingActionButton } from '../components/index'
 
 import * as Config from '../configs/index'
 
 import { useTracked } from '../configs/global_state'
+
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default function HomeView() {
 
@@ -29,13 +31,17 @@ export default function HomeView() {
         }).then(dispatch({ type: 'disableFirstUpdate' }))
     }
 
-    const getAmbientIconName = (icnName) => {
+    const getAmbientIcon = (icnName) => {
+        let icon
+        switch(icnName){
 
+        }
+        return <Icon name={icon}/>
     }
 
     const Rooms = ({ data }) => (
+ //           <getAmbientIcon icnName={data.icon}/>
         <View>
-
             <Text>{data.name}</Text>
         </View>
     )
@@ -63,7 +69,6 @@ export default function HomeView() {
         <View style={Config.Styles.HomeViewStyles.container}>
             <SearchBar />
             <Text style={Config.Styles.HomeViewStyles.homeText}>{i18n.t('home')}</Text>
-
             <FlatList
                 data={state.ambientList}
                 keyExtractor={(item, index) => item + index}
