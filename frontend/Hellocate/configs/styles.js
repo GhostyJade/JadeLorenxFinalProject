@@ -49,6 +49,7 @@ const RegistrationViewStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+
     inputField: {
         width: 350,
         height: 55,
@@ -60,9 +61,15 @@ const RegistrationViewStyles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '500',
     },
-    confirmButton: {
-        borderRadius: 14,
-        width: 150
+
+    buttonWrapper: {
+        width: 150,
+        marginHorizontal: 10
+    },
+
+    buttonGroup: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     welcome: {
         color: '#000000',
@@ -103,10 +110,39 @@ const NewAmbientView = StyleSheet.create({
     }
 })
 
+const LoginViewStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    inputField: {
+        width: 350,
+        height: 55,
+        margin: 10,
+        padding: 8,
+        color: 'black',
+        backgroundColor: 'white',
+        borderRadius: 14,
+        fontSize: 18,
+        fontWeight: '500',
+    },
+    buttonWrapper: {
+        width: 150,
+        marginHorizontal: 10
+    },
+
+    buttonGroup: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+})
+
 export {
     AppNavigatorStyles,
     FloatingActionButtonStyles,
     HomeViewStyles,
     RegistrationViewStyles,
-    NewAmbientView
+    NewAmbientView,
+    LoginViewStyles
 }
