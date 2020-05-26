@@ -8,6 +8,7 @@ import { Appbar, Snackbar } from 'react-native-paper'
 import i18n from 'i18n-js'
 
 import * as Configs from '../configs/index'
+import { Actions } from 'react-native-router-flux'
 
 export default function NewAmbientView() {
     const [state, dispatch] = useTracked()
@@ -16,7 +17,7 @@ export default function NewAmbientView() {
     const [snackbar, setSnackbar] = React.useState({ active: false, message: '' })
 
     const goBack = () => {
-        dispatch({ type: 'hideAmbientView' })
+        Actions.pop()
     }
 
     const dismissSnackbar = () => {
