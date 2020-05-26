@@ -2,24 +2,35 @@ import React from 'react'
 
 import { useTracked } from '../configs/global_state'
 
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
-import { Header } from 'react-native-elements'
+import { View, Text, TextInput } from 'react-native'
+import { Appbar, Snackbar } from 'react-native-paper'
 
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import i18n from 'i18n-js'
 
 import * as Configs from '../configs/index'
+import { Actions } from 'react-native-router-flux'
 
 export default function NewAmbientView() {
     const [state, dispatch] = useTracked()
 
     const [ambient, setAmbient] = React.useState({ name: '' })
+    const [snackbar, setSnackbar] = React.useState({ active: false, message: '' })
 
     const goBack = () => {
-        dispatch({ type: 'hideAmbientView' })
+        Actions.pop()
     }
 
+    const dismissSnackbar = () => {
+        setSnackbar({ ...snackbar, active: !snackbar.active })
+    }
+    /**
+     * Send data to the backend
+     */
     const createAmbient = async () => {
-        if (ambient === '') return
+        if (ambient.name === '') {
+            setSnackbar({ active: true, message: 'snackbar_missingAmbientName' })
+            return;
+        }
         await fetch(`${Configs.Network.serverURI}/api/v1/ambients/Jade`, { //TODO change username on auth
             method: 'POST',
             headers: {
@@ -32,8 +43,10 @@ export default function NewAmbientView() {
             })
         }).then(response => response.json()).then(
             e => {
-                if (e.success) {
+                if (e.success) { //TODO Check if ambient already exists, display error
                     goBack()
+                } else {
+                    setSnackbar({ active: true, message: 'snackbar_Error' })
                 }
             }
         )
@@ -41,22 +54,16 @@ export default function NewAmbientView() {
 
     return (
         <View style={Configs.Styles.NewAmbientView.container}>
-            <Header containerStyle={Configs.Styles.NewAmbientView.header}
-                leftComponent={
-                    <TouchableOpacity onPress={goBack}>
-                        <Icon style={Configs.Styles.NewAmbientView.backIcon} name="arrow-left"></Icon>
-                    </TouchableOpacity>
-                }
-                centerComponent={
-                    <Text style={Configs.Styles.NewAmbientView.newText}>Hellocate</Text>
-                }
-                rightComponent={
-                    <TouchableOpacity onPress={createAmbient}>
-                        <Icon style={Configs.Styles.NewAmbientView.backIcon} name="save"></Icon>
-                    </TouchableOpacity>
-                }
-            />
-            <TextInput placeholder="Name" onChangeText={text => { setAmbient({ name: text }); }} style={Configs.Styles.NewAmbientView.inputField}></TextInput>
+            <Appbar.Header style={Configs.Styles.NewAmbientView.header}>
+                <Appbar.BackAction onPress={goBack} />
+                <Appbar.Content title="Hellocate" />
+                <Appbar.Action icon="floppy" onPress={createAmbient} />
+            </Appbar.Header>
+            <View style={Configs.Styles.NewAmbientView.inputContainer}>
+                <Text style={Configs.Styles.NewAmbientView.nameText}>{i18n.t('new_ambient_name_text')}</Text>
+                <TextInput placeholder={i18n.t('new_ambient_placeholder')} onChangeText={text => { setAmbient({ name: text }); }} style={Configs.Styles.NewAmbientView.inputField}></TextInput>
+            </View>
+            <Snackbar visible={snackbar.active} onDismiss={dismissSnackbar} action={{ label: i18n.t('dismiss_snackbar'), onPress: dismissSnackbar }}>{i18n.t(snackbar.message)}</Snackbar>
         </View >
     )
 }

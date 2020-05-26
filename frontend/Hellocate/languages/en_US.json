@@ -1,5 +1,19 @@
 {
     "home": "Home",
     "searchBar": "What are you looking for?",
-    "registrationWelcome": "Welcome to Hellocate"
+    "registrationWelcome": "Welcome to Hellocate",
+    "snackbar_allFieldsRequired": "All fields are required",
+    "registration_passwordNotMatch": "Password doesn't match",
+    "registration_btnRegister": "Register",
+    "registration_txtUsername": "Username",
+    "registration_txtConfirmPassword": "Confirm password",
+    "registration_usernameTaken": "Username has already been taken",
+    "new_ambient_name_text": "Ambient Name",
+    "new_ambient_placeholder": "Name",
+    "dismiss_snackbar": "Dismiss",
+    "snackbar_missingAmbientName": "Ambient name is empty",
+    "snackbar_Error": "An error has occurred while saving new ambient data",
+    "snackbar_login_wrongData": "Wrong username or password",
+    "registration_alreadyRegistered": "Already registered?",
+    "login_welcome": "Welcome back on Hellocate"
 }

@@ -17,6 +17,6 @@ module.exports = function Register(app, Config, db, crypt) {
         if (!registered)
             await db.ref(`${Config.usersCollection}/${username}`).set({ username, password })
 
-        res.send({ registered: !registered })
+        res.json({ registered: !registered })
     })
 }

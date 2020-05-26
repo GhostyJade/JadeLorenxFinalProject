@@ -20,6 +20,6 @@ module.exports = function Login(app, Config, db, crypt, jwt) {
                 token = jwt.sign({ username }, Config.SECRET_KEY, { expiresIn: '24h' })
             }
         }
-        res.send({ authenticated, token })
+        res.json({ authenticated, token })
     })
 }

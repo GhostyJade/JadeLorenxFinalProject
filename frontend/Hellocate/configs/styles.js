@@ -5,18 +5,9 @@ import * as Constants from './constants'
 const FloatingActionButtonStyles = StyleSheet.create({
     fab: {
         position: 'absolute',
-        width: 56,
-        height: 56,
-        alignItems: 'center',
-        justifyContent: 'center',
         right: 20,
         bottom: 20,
         backgroundColor: '#343434',
-        borderRadius: 30,
-        elevation: 8
-    },
-    plusIcon: {
-        color: 'white'
     }
 })
 
@@ -58,19 +49,27 @@ const RegistrationViewStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+
     inputField: {
         width: 350,
         height: 55,
         margin: 10,
         padding: 8,
-        color: 'white',
+        color: 'black',
+        backgroundColor: 'white',
         borderRadius: 14,
         fontSize: 18,
         fontWeight: '500',
     },
-    confirmButton: {
-        borderRadius: 14,
-        width: 150
+
+    buttonWrapper: {
+        width: 150,
+        marginHorizontal: 10
+    },
+
+    buttonGroup: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     welcome: {
         color: '#000000',
@@ -85,19 +84,23 @@ const NewAmbientView = StyleSheet.create({
         height: Constants.RawScreenHeight,
     },
     header: {
-        height: Constants.HeaderBarHeight
+        backgroundColor: '#fff'
     },
-    newText: {
-        color: '#fff',
-        fontSize: 18
+    nameText: {
+        fontSize: 18,
+        fontWeight: 'bold'
+    },
+    inputContainer: {
+        margin: 24,
+        alignItems: 'center'
     },
     inputField: {
-        width: 350,
+        width: 370,
         height: 55,
-        margin: 10,
+        marginTop: 10,
         padding: 8,
-        //color: 'white',
-        borderRadius: 14,
+        backgroundColor: '#f4f4f4',
+        borderRadius: 10,
         fontSize: 18,
         fontWeight: '500',
     },
@@ -107,10 +110,39 @@ const NewAmbientView = StyleSheet.create({
     }
 })
 
+const LoginViewStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    inputField: {
+        width: 350,
+        height: 55,
+        margin: 10,
+        padding: 8,
+        color: 'black',
+        backgroundColor: 'white',
+        borderRadius: 14,
+        fontSize: 18,
+        fontWeight: '500',
+    },
+    buttonWrapper: {
+        width: 150,
+        marginHorizontal: 10
+    },
+
+    buttonGroup: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+})
+
 export {
     AppNavigatorStyles,
     FloatingActionButtonStyles,
     HomeViewStyles,
     RegistrationViewStyles,
-    NewAmbientView
+    NewAmbientView,
+    LoginViewStyles
 }
