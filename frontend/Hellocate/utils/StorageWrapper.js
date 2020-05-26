@@ -1,11 +1,13 @@
 import { AsyncStorage } from 'react-native'
 
-export default class StorageWrapper {
-    static async addData(key, value) {
-        await AsyncStorage.setItem(key, value)
-    }
+const AddData = async (key, value) => {
+    await AsyncStorage.setItem(key, value)
+}
 
-    static async getData(key) {
-        await AsyncStorage.getItem(key)
-    }
+const GetData = async (key) => {
+    await AsyncStorage.getItem(key)
+}
+
+export {
+    AddData, GetData
 }
