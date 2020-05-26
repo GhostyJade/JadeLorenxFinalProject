@@ -8,17 +8,26 @@ import { SearchBar, FloatingActionButton } from '../components/index'
 
 import * as Config from '../configs/index'
 
-import { useTracked } from '../configs/global_state'
-
 import Icon from 'react-native-vector-icons/FontAwesome'
+import SensorUtils from "../utils/SensorUtils"
+import { Actions } from "react-native-router-flux"
+
+import { useTracked } from '../configs/global_state'
 
 export default function HomeView() {
 
     const [state, dispatch] = useTracked()
 
     useEffect(() => {
-        if (state.isFirstUpdate)
+        if (state.isFirstUpdate) {
             getAmbients()
+            SensorUtils.addListener(() => {
+                if (!state.credits) {
+                    dispatch({ type: 'showCredits' })
+                    Actions.credits()
+                }
+            })
+        }
     }, [])
 
     const getAmbients = () => {
@@ -33,14 +42,14 @@ export default function HomeView() {
 
     const getAmbientIcon = (icnName) => {
         let icon
-        switch(icnName){
+        switch (icnName) {
 
         }
-        return <Icon name={icon}/>
+        return <Icon name={icon} />
     }
 
     const Rooms = ({ data }) => (
- //           <getAmbientIcon icnName={data.icon}/>
+        // <getAmbientIcon icnName={data.icon}/>
         <View>
             <Text>{data.name}</Text>
         </View>

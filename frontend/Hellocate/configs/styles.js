@@ -138,11 +138,34 @@ const LoginViewStyles = StyleSheet.create({
     },
 })
 
+const CreditViewStyles = StyleSheet.create({
+    creditOverlay: {
+        width: Constants.ScreenWidth,
+        height: Constants.ScreenHeight,
+        marginTop: Constants.TopOffset,
+    },
+    textContainer: {
+        alignContent: "center",
+        alignItems: "center",
+        top: 200 //TODO make a proper layout, this is garbage.
+    },
+    text: {
+        fontSize: 18,
+        fontWeight: "bold"
+    },
+    buttonContainer: {
+        alignSelf: 'center',
+        width: 100,
+        marginHorizontal: 20
+    }
+})
+
 export {
     AppNavigatorStyles,
     FloatingActionButtonStyles,
     HomeViewStyles,
     RegistrationViewStyles,
     NewAmbientView,
-    LoginViewStyles
+    LoginViewStyles,
+    CreditViewStyles
 }

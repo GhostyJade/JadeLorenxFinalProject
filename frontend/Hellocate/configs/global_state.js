@@ -8,7 +8,8 @@ const { Provider, useTracked } = createContainer(useValue)
 const initialState = {
     authenticated: false,
     isFirstUpdate: true,
-    ambientList: []
+    ambientList: [],
+    credits: false
 }
 
 const reducer = (state, action) => {
@@ -20,10 +21,13 @@ const reducer = (state, action) => {
         case 'enableFirstUpdate': return { ...state, showNewAmbientView: true }
 
         case 'updateAmbientList': return { ...state, ambientList: action.list }
+
+        case 'showCredits': return { ...state, credits: true }
+        case 'hideCredits': return { ...state, credits: false }
     }
 }
 
 export {
     reducer, initialState,
-    Provider, useTracked
+    Provider, useTracked //TODO useTracked if is called from the global config instance is undefined
 }
