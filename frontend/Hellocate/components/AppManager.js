@@ -13,6 +13,8 @@ export default function AppManager() {
                 <Scene hideNavBar key="registration" component={Views.RegistrationView} />
                 <Scene hideNavBar key="home" component={Views.HomeView} />
                 <Scene hideNavBar key="ambient" component={Views.NewAmbientView} />
+                <Scene hideNavBar key="items" component={Views.NewRoomView} />
+                <Scene hideNavBar key="showItems" component={Views.ItemView} />
                 <Scene hideNavBar key="credits" component={Views.CreditView} />
             </Stack>
         </Router>
