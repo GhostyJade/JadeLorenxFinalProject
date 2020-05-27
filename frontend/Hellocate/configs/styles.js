@@ -24,22 +24,46 @@ const AppNavigatorStyles = StyleSheet.create({
 const HomeViewStyles = StyleSheet.create({
     container: {
         width: Constants.ScreenWidth,
-        height: Constants.ScreenHeight,
-        marginTop: Constants.TopOffset,
+        height: Constants.RawScreenHeight - Constants.TopOffset,
+        top: Constants.TopOffset,
         backgroundColor: '#fff',
         flexDirection: 'column'
     },
     homeText: {
+        top: 5,
         fontWeight: 'bold',
         textAlign: 'center',
         fontSize: 24
     },
     ambientContainer: {
-        height: 64,
-        margin: 24
+        height: 110,
+        margin: 20
     },
     ambientText: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 20
+    },
+    headerContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    roomAdd: {
+        width: 20,
+        height: 20,
+        backgroundColor: '#aaaaaa',
+        borderRadius: 20,
+        textAlign: 'center',
+        textAlignVertical: 'center'
+    },
+    roomAddIcon: {
+        fontSize: 20,
+        color: '#fff',
+    },
+    icon: {
+        fontSize: 72
+    },
+    roomText: {
+        textAlign: 'center'
     }
 })
 
@@ -160,6 +184,31 @@ const CreditViewStyles = StyleSheet.create({
     }
 })
 
+const NewRoomViewStyles = StyleSheet.create({
+    container: {
+        width: Constants.ScreenWidth,
+        height: Constants.ScreenHeight
+    },
+    itemsWrapper: {
+        flexDirection: 'row',
+        alignContent: 'center'
+    },
+    guideText: {
+        fontSize: 18,
+        margin: 5
+    },
+    inputField: {
+        width: 200,
+        height: 35,
+        marginTop: 10,
+        padding: 8,
+        backgroundColor: '#f4f4f4',
+        borderRadius: 10,
+        fontSize: 18,
+        fontWeight: '500',
+    },
+})
+
 export {
     AppNavigatorStyles,
     FloatingActionButtonStyles,
@@ -167,5 +216,6 @@ export {
     RegistrationViewStyles,
     NewAmbientView,
     LoginViewStyles,
-    CreditViewStyles
+    CreditViewStyles,
+    NewRoomViewStyles
 }
