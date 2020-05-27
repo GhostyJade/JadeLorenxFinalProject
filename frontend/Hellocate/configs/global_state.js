@@ -9,7 +9,8 @@ const initialState = {
     authenticated: false,
     isFirstUpdate: true,
     ambientList: [],
-    credits: false
+    credits: false,
+    user: { username: '', token: '' }
 }
 
 const reducer = (state, action) => {
@@ -24,6 +25,8 @@ const reducer = (state, action) => {
 
         case 'showCredits': return { ...state, credits: true }
         case 'hideCredits': return { ...state, credits: false }
+
+        case 'updateUserData': return { ...state, user: action.userdata }
     }
 }
 
