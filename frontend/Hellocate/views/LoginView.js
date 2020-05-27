@@ -8,7 +8,11 @@ import { Actions } from 'react-native-router-flux'
 import { Snackbar } from 'react-native-paper'
 import { t } from 'i18n-js'
 
+import { useTracked } from '../configs/global_state'
+
 export default function LoginView() {
+
+    const [state, dispatch] = useTracked()
 
     const [snackbar, setSnackbar] = React.useState({ active: false, message: '' })//it's time to make a custom component, don't it? // TODO create a custom snackbar component
     const [userData, setUserData] = React.useState({ username: '', password: '' })
@@ -35,7 +39,11 @@ export default function LoginView() {
             if (result.authenticated) {
                 const { token } = result
                 const { username } = userData
-                Config.StorageWrapper.AddData('token', token).then(Config.StorageWrapper.AddData('username', username)).then(() => { Actions.replace('home') }) //TODO add login time and check if user have already signed in before. if so, try to get the previous stored data and, if it's not valid anymore, do a new login
+
+                dispatch({ type: 'updateUserData', userdata: { username, token } })
+
+                Actions.replace('home')
+                //Config.StorageWrapper.AddData('token', token).then(Config.StorageWrapper.AddData('username', username)).then(() => { Actions.replace('home') }) //TODO add login time and check if user have already signed in before. if so, try to get the previous stored data and, if it's not valid anymore, do a new login
             } else {
                 setSnackbar({ active: true, message: 'snackbar_login_wrongData' })
             }
@@ -58,10 +66,10 @@ export default function LoginView() {
             <TextInput placeholder="Password" secureTextEntry style={Config.Styles.LoginViewStyles.inputField} onChangeText={changePassword} />
             <View style={Config.Styles.LoginViewStyles.buttonGroup}>
                 <View style={Config.Styles.LoginViewStyles.buttonWrapper}>
-                    <Button onPress={performLogin} title="Login" />
+                    <Button onPress={() => { Actions.replace('registration') }} title="Register" />
                 </View>
                 <View style={Config.Styles.LoginViewStyles.buttonWrapper}>
-                    <Button onPress={() => { Actions.replace('registration') }} title="Register" />
+                    <Button onPress={performLogin} title="Login" />
                 </View>
             </View>
             <Snackbar visible={snackbar.active} onDismiss={dismissSnackbar} action={{ label: t('dismiss_snackbar'), onPress: dismissSnackbar }}>{t(snackbar.message)}</Snackbar>
