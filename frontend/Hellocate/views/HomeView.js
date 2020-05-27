@@ -8,7 +8,7 @@ import { SearchBar, FloatingActionButton } from '../components/index'
 
 import * as Config from '../configs/index'
 
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import SensorUtils from "../utils/SensorUtils"
 import { Actions } from "react-native-router-flux"
 
@@ -40,18 +40,20 @@ export default function HomeView() {
         }).then(dispatch({ type: 'disableFirstUpdate' }))
     }
 
-    const getAmbientIcon = (icnName) => {
+    const GetAmbientIcon = ({ icnName }) => {
         let icon
         switch (icnName) {
-
+            case 'fridge': icon = 'fridge-outline'; break
+            case 'bed': icon = 'bed'; break
+            default: icon = 'cancel'
         }
-        return <Icon name={icon} />
+        return <Icon style={Config.Styles.HomeViewStyles.icon} name={icon} />
     }
 
     const Rooms = ({ data }) => (
-        // <getAmbientIcon icnName={data.icon}/>
         <View>
-            <Text>{data.name}</Text>
+            <GetAmbientIcon icnName={data.icon} />
+            <Text style={Config.Styles.HomeViewStyles.roomText}>{data.name}</Text>
         </View>
     )
 
@@ -67,12 +69,19 @@ export default function HomeView() {
         )
     }
 
-    const Ambient = ({ data }) => (
-        <View style={Config.Styles.HomeViewStyles.ambientContainer}>
-            <Text style={Config.Styles.HomeViewStyles.ambientText}>{data.name}</Text>
-            <RoomsList data={data} />
-        </View>
-    )
+    const Ambient = ({ data }) => {
+        return (
+            <View style={Config.Styles.HomeViewStyles.ambientContainer}>
+                <View style={Config.Styles.HomeViewStyles.headerContainer}>
+                    <Text style={Config.Styles.HomeViewStyles.ambientText}>{data.name}</Text>
+                    <Text onPress={() => Actions.items({ data: { key: data.id } })} style={Config.Styles.HomeViewStyles.roomAdd}>
+                        <Icon style={Config.Styles.HomeViewStyles.roomAddIcon} name="plus" />
+                    </Text>
+                </View>
+                <RoomsList data={data} />
+            </View>
+        )
+    }
 
     return (
         <View style={Config.Styles.HomeViewStyles.container}>
