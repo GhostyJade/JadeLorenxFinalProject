@@ -11,19 +11,24 @@ import * as Config from '../configs/index'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Actions } from 'react-native-router-flux';
 
+import { useTracked } from '../configs/global_state'
+
 export default function NewRoomView(props) {
+
+    const [state, dispatch] = useTracked()
 
     const [room, setRoom] = React.useState({ name: '', icon: 'fridge' })
 
     const registerNewRoom = () => {
         if (room.name === '' || room.icon === '') {
             //show snackbar
-            return;
+            return
         }
-        console.log(props.data)
-        fetch(`${Config.Network.serverURI}/${Config.Network.apiPath}rooms/Jade`, {
+
+        fetch(`${Config.Network.serverURI}/${Config.Network.apiPath}rooms/${state.user.username}`, {
             method: 'POST',
             headers: {
+                'x-access-token': state.user.token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(
@@ -37,7 +42,7 @@ export default function NewRoomView(props) {
                 }
             )
         }).then(response => response.json()).then(result => {
-            if(result.success){
+            if (result.success) {
                 Actions.pop()
                 //update main view
             }

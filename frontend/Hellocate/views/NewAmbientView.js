@@ -26,14 +26,15 @@ export default function NewAmbientView() {
     /**
      * Send data to the backend
      */
-    const createAmbient = async () => {
+    const createAmbient = () => {
         if (ambient.name === '') {
             setSnackbar({ active: true, message: 'snackbar_missingAmbientName' })
             return;
         }
-        await fetch(`${Configs.Network.serverURI}/api/v1/ambients/Jade`, { //TODO change username on auth
+        fetch(`${Configs.Network.serverURI}/api/v1/ambients/${state.user.username}`, {
             method: 'POST',
             headers: {
+                'x-access-token': state.user.token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({

@@ -31,7 +31,11 @@ export default function HomeView() {
     }, [])
 
     const getAmbients = () => {
-        fetch(`${Config.Network.serverURI}/api/v1/rooms/Jade`).then(
+        fetch(`${Config.Network.serverURI}/api/v1/rooms/${state.user.username}`, {
+            headers: {
+                'x-access-token': state.user.token
+            }
+        }).then(
             response => response.json()
         ).then(e => {
             if (e.success) {
