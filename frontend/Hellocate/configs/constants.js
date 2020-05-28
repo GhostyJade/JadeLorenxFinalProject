@@ -7,4 +7,4 @@ const bottomBarHeight = 50 //the bottom bar is 50px high
 
 export const RawScreenHeight = Math.round(Dimensions.get('window').height)
 export const ScreenWidth = Math.round(Dimensions.get('window').width)
-export const ScreenHeight = RawScreenHeight  - bottomBarHeight - TopOffset
+export const ScreenHeight = RawScreenHeight - TopOffset// - bottomBarHeight - TopOffset
