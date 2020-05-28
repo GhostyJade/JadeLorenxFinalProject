@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 
+const Config = require('../config.json') //TODO use the global config instance
+
 module.exports = async function ValidateToken(req, res) {
     const token = req.headers['x-access-token']
 
@@ -10,7 +12,7 @@ module.exports = async function ValidateToken(req, res) {
         errorCode = 403
         success = false
     } else {
-        jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        jwt.verify(token, Config.SECRET_KEY, (err, decoded) => {
             if (err) {
                 errorCode = 403
                 success = false
