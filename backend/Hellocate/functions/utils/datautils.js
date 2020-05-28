@@ -1,9 +1,11 @@
 const TokenValidator = require('./tokenvalidator')
 
 class DataUtils {
+
     constructor(dbInstance, config) {
         this.db = dbInstance
         this.config = config
+        this.TokenValidator = TokenValidator
     }
 
     // Ambient Data utils:
