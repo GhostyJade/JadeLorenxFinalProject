@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 
 import i18n from 'i18n-js'
 
-import { Text, View, FlatList } from 'react-native'
+import { Text, View, FlatList, TouchableOpacity } from 'react-native'
 
 import { SearchBar, FloatingActionButton } from '../components/index'
 
@@ -39,9 +39,10 @@ export default function HomeView() {
             response => response.json()
         ).then(e => {
             if (e.success) {
+                dispatch({ type: 'disableFirstUpdate' })
                 dispatch({ type: 'updateAmbientList', list: e.ambients })
             } //handle failed to get ambients
-        }).then(dispatch({ type: 'disableFirstUpdate' }))
+        })
     }
 
     const GetAmbientIcon = ({ icnName }) => {
@@ -54,21 +55,27 @@ export default function HomeView() {
         return <Icon style={Config.Styles.HomeViewStyles.icon} name={icon} />
     }
 
-    const Rooms = ({ data }) => (
-        <View>
-            <GetAmbientIcon icnName={data.icon} />
-            <Text style={Config.Styles.HomeViewStyles.roomText}>{data.name}</Text>
-        </View>
-    )
+    const Rooms = ({ id, data }) => {
+        return (
+            <View>
+                <TouchableOpacity onPress={() => {
+                    Actions.showItems({ data: { ambientKey: id, roomKey: data[0], name: data[1].name } })
+                }}>
+                    <GetAmbientIcon icnName={data[1].icon} />
+                    <Text style={Config.Styles.HomeViewStyles.roomText}>{data[1].name}</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 
-    const RoomsList = ({ data }) => {
+    const RoomsList = ({ id, data }) => {
         if (data.rooms === undefined)
             return null
         return (
             <FlatList horizontal
-                data={Object.values(data.rooms)}
+                data={Object.entries(data.rooms)}
                 keyExtractor={(item, index) => item + index}
-                renderItem={({ item }) => <Rooms data={item} />}
+                renderItem={({ item }) => <Rooms id={id} data={item} />}
             />
         )
     }
@@ -82,7 +89,7 @@ export default function HomeView() {
                         <Icon style={Config.Styles.HomeViewStyles.roomAddIcon} name="plus" />
                     </Text>
                 </View>
-                <RoomsList data={data} />
+                <RoomsList id={data.id} data={data} />
             </View>
         )
     }
