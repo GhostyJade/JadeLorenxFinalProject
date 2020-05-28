@@ -117,22 +117,36 @@ class DataUtils {
 
     async addItem(username, data, res) {
         let success = false
-        let doesItemxists = false
-        await this.db.ref(`${this.config.ambientsCollection}/${username}/${data.ambientKey}/${this.config.roomsCollection}/${this.config.roomKey}/${this.config.itemsCollection}`).once("value", snapshot => {
+        let doesItemExists = false
+        await this.db.ref(`${this.config.ambientsCollection}/${username}/${data.ambientKey}/${this.config.roomsCollection}/${data.roomKey}/${this.config.itemsCollection}`).once("value", snapshot => {
             if (snapshot.exists()) {
                 snapshot.forEach(child => {
                     if (child.val().name === data.item.name) {
-                        doesItemxists = true
+                        doesItemExists = true
                         return
                     }
                 })
             }
         })
-        if (!doesItemxists) {
-            await this.db.ref(`${this.config.ambientsCollection}/${username}/${data.ambientKey}/${this.config.roomsCollection}/${this.config.roomKey}/${this.config.itemsCollection}`).push(data.item)
+        if (!doesItemExists) {
+            await this.db.ref(`${this.config.ambientsCollection}/${username}/${data.ambientKey}/${this.config.roomsCollection}/${data.roomKey}/${this.config.itemsCollection}`).push(data.item)
             success = true
         }
         res.json({ success, roomName: data.item.name })
+    }
+
+    async getAllUserItems(username, data, res) {
+        let success = false // idk which errors could happen, I should check later on... // TODO
+        let items = []
+        await this.db.ref(`${this.config.ambientsCollection}/${username}/${data.ambientKey}/${this.config.roomsCollection}/${data.roomKey}/${this.config.itemsCollection}`).once("value", snapshot => {
+            if (snapshot.exists()) {
+                snapshot.forEach(child => {
+                    items.push(child)
+                })
+            }
+        })
+        success = true
+        res.json({ success, items })
     }
 
     //#endregion

@@ -1,3 +1,4 @@
 module.exports = {
-    AddItem: require('./add')
+    AddItem: require('./add'),
+    GetItems: require('./get')
 }
