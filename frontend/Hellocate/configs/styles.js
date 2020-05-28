@@ -209,6 +209,13 @@ const NewRoomViewStyles = StyleSheet.create({
     },
 })
 
+const ItemViewStyles = StyleSheet.create({
+    container: {
+        width: Constants.ScreenWidth,
+        height: Constants.RawScreenHeight,
+    },
+})
+
 export {
     AppNavigatorStyles,
     FloatingActionButtonStyles,
@@ -217,5 +224,6 @@ export {
     NewAmbientView,
     LoginViewStyles,
     CreditViewStyles,
-    NewRoomViewStyles
+    NewRoomViewStyles,
+    ItemViewStyles
 }
