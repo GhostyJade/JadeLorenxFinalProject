@@ -2,7 +2,7 @@ import React from 'react'
 
 import { View, Text, TextInput } from 'react-native'
 
-import { Appbar } from 'react-native-paper'
+import { Appbar, Snackbar } from 'react-native-paper'
 
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -13,15 +13,22 @@ import { Actions } from 'react-native-router-flux';
 
 import { useTracked } from '../configs/global_state'
 
+import i18n from 'i18n-js'
+
 export default function NewRoomView(props) {
 
     const [state, dispatch] = useTracked()
 
     const [room, setRoom] = React.useState({ name: '', icon: 'fridge' })
+    const [snackbar, setSnackbar] = React.useState({ active: false, message: '' })
+
+    const dismissSnackbar = () => {
+        setSnackbar({ ...snackbar, active: !snackbar.active })
+    }
 
     const registerNewRoom = () => {
         if (room.name === '' || room.icon === '') {
-            //show snackbar
+            setSnackbar({ active: true, message: 'snackbar_allFieldsRequired' })
             return
         }
 
@@ -45,6 +52,8 @@ export default function NewRoomView(props) {
             if (result.success) {
                 Actions.pop()
                 //update main view
+            } else {
+                setSnackbar({ active: true, message: 'snackbar_Error' })
             }
         })
     }
@@ -80,6 +89,7 @@ export default function NewRoomView(props) {
                     onChangeItem={item => setRoom({ ...room, icon: item.value })}
                 />
             </View>
+            <Snackbar visible={snackbar.active} onDismiss={dismissSnackbar} action={{ label: i18n.t('dismiss_snackbar'), onPress: dismissSnackbar }}>{i18n.t(snackbar.message)}</Snackbar>
         </View>
     )
 }

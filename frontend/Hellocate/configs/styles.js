@@ -187,7 +187,7 @@ const CreditViewStyles = StyleSheet.create({
 const NewRoomViewStyles = StyleSheet.create({
     container: {
         width: Constants.ScreenWidth,
-        height: Constants.ScreenHeight
+        height: Constants.ScreenHeight //Wrong height
     },
     itemsWrapper: {
         flexDirection: 'row',
