@@ -216,6 +216,31 @@ const ItemViewStyles = StyleSheet.create({
     },
 })
 
+const NewItemViewStyle = StyleSheet.create({
+    container: {
+        width: Constants.ScreenWidth,
+        height: Constants.ScreenHeight,
+    },
+    inputField: {
+        width: Constants.ScreenWidth - 30,
+        height: 35,
+        top: 15,
+        bottom: 15,
+        marginHorizontal: 15,
+        padding: 8,
+        backgroundColor: '#f4f4f4',
+        borderRadius: 10,
+        fontSize: 18,
+        fontWeight: '500',
+    },
+    colorPicker: {
+        margin: 20,
+        width: 200,
+        height: 200,
+        alignSelf: 'center'
+    }
+})
+
 export {
     AppNavigatorStyles,
     FloatingActionButtonStyles,
@@ -225,5 +250,6 @@ export {
     LoginViewStyles,
     CreditViewStyles,
     NewRoomViewStyles,
-    ItemViewStyles
+    ItemViewStyles,
+    NewItemViewStyle
 }
