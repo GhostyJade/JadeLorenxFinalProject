@@ -47,7 +47,11 @@ export default function HomeView() {
         let icon
         switch (icnName) {
             case 'fridge': icon = 'fridge-outline'; break
-            case 'bed': icon = 'bed'; break
+            case 'bed': icon = 'hotel'; break
+            case 'tv': icon = 'television'; break
+            case 'wc': icon = 'water'; break
+            case 'car': icon = 'car'; break
+            case 'suitcase': icon = 'briefcase'; break
             default: icon = 'cancel'
         }
         return <Icon style={Config.Styles.HomeViewStyles.icon} name={icon} />
