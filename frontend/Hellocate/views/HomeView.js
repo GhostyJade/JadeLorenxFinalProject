@@ -9,7 +9,7 @@ import { SearchBar, FloatingActionButton } from '../components/index'
 import * as Config from '../configs/index'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import SensorUtils from "../utils/SensorUtils"
+// import SensorUtils from "../utils/SensorUtils"
 import { Actions } from "react-native-router-flux"
 
 import { useTracked } from '../configs/global_state'
@@ -19,15 +19,14 @@ export default function HomeView() {
     const [state, dispatch] = useTracked()
 
     useEffect(() => {
-        if (state.isFirstUpdate) {
-            getAmbients()
-            SensorUtils.addListener(() => {
-                if (!state.credits) {
-                    dispatch({ type: 'showCredits' })
-                    Actions.credits()
-                }
-            })
-        }
+        getAmbients()
+        /*SensorUtils.addListener(() => {
+            if (!state.credits) {
+                dispatch({ type: 'showCredits' })
+                Actions.credits()
+            }
+        })*/
+
     }, [])
 
     const getAmbients = () => {
@@ -39,7 +38,6 @@ export default function HomeView() {
             response => response.json()
         ).then(e => {
             if (e.success) {
-                dispatch({ type: 'disableFirstUpdate' })
                 dispatch({ type: 'updateAmbientList', list: e.ambients })
             } //handle failed to get ambients
         })
@@ -103,7 +101,7 @@ export default function HomeView() {
                 keyExtractor={(item, index) => item + index}
                 renderItem={({ item }) => <Ambient data={item} />}
             />
-            <FloatingActionButton />
+            <FloatingActionButton fetchData={getAmbients} />
         </View>
     )
 }
