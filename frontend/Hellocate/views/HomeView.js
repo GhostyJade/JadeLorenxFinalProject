@@ -2,14 +2,14 @@ import React, { useEffect } from "react"
 
 import i18n from 'i18n-js'
 
-import { Text, View, FlatList } from 'react-native'
+import { Text, View, FlatList, TouchableOpacity } from 'react-native'
 
 import { SearchBar, FloatingActionButton } from '../components/index'
 
 import * as Config from '../configs/index'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import SensorUtils from "../utils/SensorUtils"
+// import SensorUtils from "../utils/SensorUtils"
 import { Actions } from "react-native-router-flux"
 
 import { useTracked } from '../configs/global_state'
@@ -19,52 +19,65 @@ export default function HomeView() {
     const [state, dispatch] = useTracked()
 
     useEffect(() => {
-        if (state.isFirstUpdate) {
-            getAmbients()
-            SensorUtils.addListener(() => {
-                if (!state.credits) {
-                    dispatch({ type: 'showCredits' })
-                    Actions.credits()
-                }
-            })
-        }
+        getAmbients()
+        /*SensorUtils.addListener(() => {
+            if (!state.credits) {
+                dispatch({ type: 'showCredits' })
+                Actions.credits()
+            }
+        })*/
+
     }, [])
 
     const getAmbients = () => {
-        fetch(`${Config.Network.serverURI}/api/v1/rooms/Jade`).then(
+        fetch(`${Config.Network.serverURI}/api/v1/rooms/${state.user.username}`, {
+            headers: {
+                'x-access-token': state.user.token
+            }
+        }).then(
             response => response.json()
         ).then(e => {
             if (e.success) {
                 dispatch({ type: 'updateAmbientList', list: e.ambients })
             } //handle failed to get ambients
-        }).then(dispatch({ type: 'disableFirstUpdate' }))
+        })
     }
 
     const GetAmbientIcon = ({ icnName }) => {
         let icon
         switch (icnName) {
             case 'fridge': icon = 'fridge-outline'; break
-            case 'bed': icon = 'bed'; break
+            case 'bed': icon = 'hotel'; break
+            case 'tv': icon = 'television'; break
+            case 'wc': icon = 'water'; break
+            case 'car': icon = 'car'; break
+            case 'suitcase': icon = 'briefcase'; break
             default: icon = 'cancel'
         }
         return <Icon style={Config.Styles.HomeViewStyles.icon} name={icon} />
     }
 
-    const Rooms = ({ data }) => (
-        <View>
-            <GetAmbientIcon icnName={data.icon} />
-            <Text style={Config.Styles.HomeViewStyles.roomText}>{data.name}</Text>
-        </View>
-    )
+    const Rooms = ({ id, data }) => {
+        return (
+            <View>
+                <TouchableOpacity onPress={() => {
+                    Actions.showItems({ data: { ambientKey: id, roomKey: data[0], name: data[1].name } })
+                }}>
+                    <GetAmbientIcon icnName={data[1].icon} />
+                    <Text style={Config.Styles.HomeViewStyles.roomText}>{data[1].name}</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 
-    const RoomsList = ({ data }) => {
+    const RoomsList = ({ id, data }) => {
         if (data.rooms === undefined)
             return null
         return (
             <FlatList horizontal
-                data={Object.values(data.rooms)}
+                data={Object.entries(data.rooms)}
                 keyExtractor={(item, index) => item + index}
-                renderItem={({ item }) => <Rooms data={item} />}
+                renderItem={({ item }) => <Rooms id={id} data={item} />}
             />
         )
     }
@@ -74,11 +87,11 @@ export default function HomeView() {
             <View style={Config.Styles.HomeViewStyles.ambientContainer}>
                 <View style={Config.Styles.HomeViewStyles.headerContainer}>
                     <Text style={Config.Styles.HomeViewStyles.ambientText}>{data.name}</Text>
-                    <Text onPress={() => Actions.items({ data: { key: data.id } })} style={Config.Styles.HomeViewStyles.roomAdd}>
+                    <Text onPress={() => Actions.items({ data: { key: data.id }, fetchData: getAmbients })} style={Config.Styles.HomeViewStyles.roomAdd}>
                         <Icon style={Config.Styles.HomeViewStyles.roomAddIcon} name="plus" />
                     </Text>
                 </View>
-                <RoomsList data={data} />
+                <RoomsList id={data.id} data={data} />
             </View>
         )
     }
@@ -92,7 +105,7 @@ export default function HomeView() {
                 keyExtractor={(item, index) => item + index}
                 renderItem={({ item }) => <Ambient data={item} />}
             />
-            <FloatingActionButton />
+            <FloatingActionButton fetchData={getAmbients} />
         </View>
     )
 }

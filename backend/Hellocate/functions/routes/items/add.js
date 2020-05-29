@@ -1,11 +1,11 @@
-module.exports = function AddRoom(app, DataUtils) {
-    app.post('/rooms/:username/', async (req, res) => {
+module.exports = function AddItem(app, DataUtils) {
+    app.post('/items/:username/', async (req, res) => {
         const result = await DataUtils.TokenValidator(req, res)
 
         if (result.success) {
-            const roomData = req.body.data
+            const itemData = req.body.data
             const { username } = req.params
-            DataUtils.addRoom(username, roomData, res)
+            DataUtils.addItem(username, itemData, res)
         } else {
             res.json({ result })
         }

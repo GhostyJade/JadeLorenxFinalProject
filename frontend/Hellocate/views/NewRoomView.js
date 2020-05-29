@@ -2,7 +2,7 @@ import React from 'react'
 
 import { View, Text, TextInput } from 'react-native'
 
-import { Appbar } from 'react-native-paper'
+import { Appbar, Snackbar } from 'react-native-paper'
 
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -11,19 +11,31 @@ import * as Config from '../configs/index'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Actions } from 'react-native-router-flux';
 
+import { useTracked } from '../configs/global_state'
+
+import i18n from 'i18n-js'
+
 export default function NewRoomView(props) {
 
+    const [state, dispatch] = useTracked()
+
     const [room, setRoom] = React.useState({ name: '', icon: 'fridge' })
+    const [snackbar, setSnackbar] = React.useState({ active: false, message: '' })
+
+    const dismissSnackbar = () => {
+        setSnackbar({ ...snackbar, active: !snackbar.active })
+    }
 
     const registerNewRoom = () => {
         if (room.name === '' || room.icon === '') {
-            //show snackbar
-            return;
+            setSnackbar({ active: true, message: 'snackbar_allFieldsRequired' })
+            return
         }
-        console.log(props.data)
-        fetch(`${Config.Network.serverURI}/${Config.Network.apiPath}rooms/Jade`, {
+
+        fetch(`${Config.Network.serverURI}/${Config.Network.apiPath}rooms/${state.user.username}`, {
             method: 'POST',
             headers: {
+                'x-access-token': state.user.token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(
@@ -37,9 +49,11 @@ export default function NewRoomView(props) {
                 }
             )
         }).then(response => response.json()).then(result => {
-            if(result.success){
+            if (result.success) {
+                props.fetchData()
                 Actions.pop()
-                //update main view
+            } else {
+                setSnackbar({ active: true, message: 'snackbar_Error' })
             }
         })
     }
@@ -47,10 +61,10 @@ export default function NewRoomView(props) {
     const dropdownItems = [
         { label: <Text><Icon name="fridge" /> Fridge</Text>, value: 'fridge' },
         { label: <Text><Icon name="hotel" /> Bed</Text>, value: 'bed' },
-        { label: <Text><Icon name="television" /> Tv</Text>, value: 'Tv' },
-        { label: <Text><Icon name="water" /> Wc</Text>, value: 'Wc' },
-        { label: <Text><Icon name="car" /> Car</Text>, value: 'Car' },
-        { label: <Text><Icon name="briefcase" /> Suitcase</Text>, value: 'Suitcase' }
+        { label: <Text><Icon name="television" /> Tv</Text>, value: 'tv' },
+        { label: <Text><Icon name="water" /> Wc</Text>, value: 'wc' },
+        { label: <Text><Icon name="car" /> Car</Text>, value: 'car' },
+        { label: <Text><Icon name="briefcase" /> Suitcase</Text>, value: 'suitcase' }
     ]
 
     return (
@@ -75,6 +89,7 @@ export default function NewRoomView(props) {
                     onChangeItem={item => setRoom({ ...room, icon: item.value })}
                 />
             </View>
+            <Snackbar visible={snackbar.active} onDismiss={dismissSnackbar} action={{ label: i18n.t('dismiss_snackbar'), onPress: dismissSnackbar }}>{i18n.t(snackbar.message)}</Snackbar>
         </View>
     )
 }

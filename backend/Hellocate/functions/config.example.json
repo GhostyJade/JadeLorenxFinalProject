@@ -2,5 +2,6 @@
     "SECRET_KEY": "your_key",
     "usersCollection": "users",
     "ambientsCollection": "ambients",
-    "roomsCollection": "rooms"
+    "roomsCollection": "rooms",
+    "itemsCollection": "items"
 }

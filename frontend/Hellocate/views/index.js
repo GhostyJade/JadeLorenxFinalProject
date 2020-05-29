@@ -5,6 +5,7 @@ import NewAmbientView from './NewAmbientView'
 import CreditView from './CreditView'
 import NewRoomView from './NewRoomView'
 import ItemView from './ItemView'
+import NewItemView from './NewItemView'
 
 export {
     HomeView,
@@ -12,5 +13,6 @@ export {
     NewAmbientView,
     NewRoomView,
     CreditView, 
-    ItemView
+    ItemView,
+    NewItemView
 }
