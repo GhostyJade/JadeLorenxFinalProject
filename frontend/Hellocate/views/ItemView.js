@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import { Actions } from 'react-native-router-flux'
 
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 
 import { Appbar, FAB } from 'react-native-paper'
 
@@ -60,7 +60,11 @@ export default function ItemView(props) {
             <List.Section >
                 {mapItems}
             </List.Section>
-            <FAB icon="plus" style={Config.Styles.FloatingActionButtonStyles.fab} onPress={Actions.newItem} />
+            <FAB icon="plus" style={Config.Styles.FloatingActionButtonStyles.fab} onPress={() => Actions.newItem({
+                data: {
+                    ambientKey: props.data.ambientKey, roomKey: props.data.roomKey
+                }, fetchData: getItems
+            })} />
         </View>
     )
 }
