@@ -50,8 +50,8 @@ export default function NewRoomView(props) {
             )
         }).then(response => response.json()).then(result => {
             if (result.success) {
+                props.fetchData()
                 Actions.pop()
-                //update main view
             } else {
                 setSnackbar({ active: true, message: 'snackbar_Error' })
             }

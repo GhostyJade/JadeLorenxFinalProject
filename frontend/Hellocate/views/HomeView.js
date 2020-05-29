@@ -83,7 +83,7 @@ export default function HomeView() {
             <View style={Config.Styles.HomeViewStyles.ambientContainer}>
                 <View style={Config.Styles.HomeViewStyles.headerContainer}>
                     <Text style={Config.Styles.HomeViewStyles.ambientText}>{data.name}</Text>
-                    <Text onPress={() => Actions.items({ data: { key: data.id } })} style={Config.Styles.HomeViewStyles.roomAdd}>
+                    <Text onPress={() => Actions.items({ data: { key: data.id }, fetchData: getAmbients })} style={Config.Styles.HomeViewStyles.roomAdd}>
                         <Icon style={Config.Styles.HomeViewStyles.roomAddIcon} name="plus" />
                     </Text>
                 </View>
