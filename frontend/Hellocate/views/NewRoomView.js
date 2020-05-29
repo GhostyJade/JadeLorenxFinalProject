@@ -61,10 +61,10 @@ export default function NewRoomView(props) {
     const dropdownItems = [
         { label: <Text><Icon name="fridge" /> Fridge</Text>, value: 'fridge' },
         { label: <Text><Icon name="hotel" /> Bed</Text>, value: 'bed' },
-        { label: <Text><Icon name="television" /> Tv</Text>, value: 'Tv' },
-        { label: <Text><Icon name="water" /> Wc</Text>, value: 'Wc' },
-        { label: <Text><Icon name="car" /> Car</Text>, value: 'Car' },
-        { label: <Text><Icon name="briefcase" /> Suitcase</Text>, value: 'Suitcase' }
+        { label: <Text><Icon name="television" /> Tv</Text>, value: 'tv' },
+        { label: <Text><Icon name="water" /> Wc</Text>, value: 'wc' },
+        { label: <Text><Icon name="car" /> Car</Text>, value: 'car' },
+        { label: <Text><Icon name="briefcase" /> Suitcase</Text>, value: 'suitcase' }
     ]
 
     return (
