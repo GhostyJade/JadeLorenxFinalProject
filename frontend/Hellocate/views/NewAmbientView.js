@@ -10,7 +10,7 @@ import i18n from 'i18n-js'
 import * as Configs from '../configs/index'
 import { Actions } from 'react-native-router-flux'
 
-export default function NewAmbientView() {
+export default function NewAmbientView(props) {
     const [state, dispatch] = useTracked()
 
     const [ambient, setAmbient] = React.useState({ name: '' })
@@ -24,7 +24,7 @@ export default function NewAmbientView() {
         setSnackbar({ ...snackbar, active: !snackbar.active })
     }
     /**
-     * Send data to the backend
+     * Send data to backend
      */
     const createAmbient = () => {
         if (ambient.name === '') {
@@ -45,6 +45,7 @@ export default function NewAmbientView() {
         }).then(response => response.json()).then(
             e => {
                 if (e.success) { //TODO Check if ambient already exists, display error
+                    props.fetchData()
                     goBack()
                 } else {
                     setSnackbar({ active: true, message: 'snackbar_Error' })

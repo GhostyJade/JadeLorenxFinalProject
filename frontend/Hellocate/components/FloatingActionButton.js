@@ -8,6 +8,6 @@ import { Actions } from 'react-native-router-flux'
 export default function FloatingActionButton(props) {
 
     return (
-       <FAB icon="plus" style={Config.Styles.FloatingActionButtonStyles.fab}  onPress={() => Actions.ambient()}/>
+        <FAB icon="plus" style={Config.Styles.FloatingActionButtonStyles.fab} onPress={() => Actions.ambient({ fetchData: props.fetchData })} />
     )
 }
